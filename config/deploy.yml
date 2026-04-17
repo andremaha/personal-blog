@@ -2,26 +2,26 @@
 service: blog
 
 # Name of the container image.
-image: your-github-username/blog
+image: andremaha/blog
 
 # Deploy to these servers.
 servers:
   web:
-    - YOUR_SERVER_IP
+    - 159.223.234.130
   # job:
   #   hosts:
-  #     - YOUR_SERVER_IP
+  #     - 159.223.234.130
   #   cmd: bin/jobs
 
 # Enable SSL auto certification via Let's Encrypt.
 proxy:
   ssl: true
-  host: YOUR_DOMAIN.com
+  host: toktok.news
 
 # Use GitHub Container Registry.
 registry:
   server: ghcr.io
-  username: your-github-username
+  username: andremaha
   password:
     - KAMAL_REGISTRY_PASSWORD
 
