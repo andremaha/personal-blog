@@ -1,0 +1,41 @@
+<div class="flex items-center justify-between mb-8">
+  <h1 class="text-2xl font-bold">Posts</h1>
+  <a href="<%= new_admin_post_path %>" class="bg-gray-900 text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-gray-800 transition-colors no-underline">
+    New post
+  </a>
+</div>
+
+<% if @draft_posts.any? %>
+  <section class="mb-10">
+    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Drafts</h2>
+    <div class="bg-white rounded-lg border border-gray-200 divide-y divide-gray-100">
+      <% @draft_posts.each do |post| %>
+        <div class="flex items-center justify-between px-4 py-3">
+          <div>
+            <a href="<%= edit_admin_post_path(post) %>" class="font-medium text-gray-900 hover:text-gray-600 no-underline"><%= post.title %></a>
+            <span class="ml-2 text-xs text-amber-600 font-medium">Draft</span>
+          </div>
+          <span class="text-xs text-gray-400"><%= post.updated_at.strftime("%b %-d") %></span>
+        </div>
+      <% end %>
+    </div>
+  </section>
+<% end %>
+
+<% if @published_posts.any? %>
+  <section>
+    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Published</h2>
+    <div class="bg-white rounded-lg border border-gray-200 divide-y divide-gray-100">
+      <% @published_posts.each do |post| %>
+        <div class="flex items-center justify-between px-4 py-3">
+          <a href="<%= edit_admin_post_path(post) %>" class="font-medium text-gray-900 hover:text-gray-600 no-underline"><%= post.title %></a>
+          <span class="text-xs text-gray-400"><%= post.published_at.strftime("%b %-d, %Y") %></span>
+        </div>
+      <% end %>
+    </div>
+  </section>
+<% end %>
+
+<% if @draft_posts.empty? && @published_posts.empty? %>
+  <p class="text-gray-400 italic">No posts yet. <a href="<%= new_admin_post_path %>" class="text-gray-600 underline">Write your first post</a>.</p>
+<% end %>

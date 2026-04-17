@@ -1,0 +1,41 @@
+<% content_for(:title, "Andrey Esaulov — Blog") %>
+
+<div class="space-y-12">
+  <% posts = @posts.to_a %>
+  <% displayable = posts.first(Post::PER_PAGE) %>
+  <% has_more = posts.size > Post::PER_PAGE %>
+
+  <% displayable.each do |post| %>
+    <article>
+      <time datetime="<%= post.published_at.iso8601 %>" class="text-sm text-gray-400 block mb-1">
+        <%= post.published_at.strftime("%B %-d, %Y") %>
+      </time>
+      <h2 class="text-xl font-semibold">
+        <a href="<%= post_path(slug: post.slug) %>" class="text-gray-900 hover:text-gray-600 transition-colors no-underline">
+          <%= post.title %>
+        </a>
+      </h2>
+      <% if post.excerpt.present? %>
+        <p class="mt-2 text-gray-600 leading-relaxed"><%= post.excerpt %></p>
+      <% end %>
+    </article>
+  <% end %>
+
+  <% if displayable.empty? %>
+    <p class="text-gray-400 italic">No posts yet.</p>
+  <% end %>
+
+  <% page = [params[:page].to_i, 1].max %>
+  <% if page > 1 || has_more %>
+    <nav class="flex items-center justify-between pt-4 border-t border-gray-100">
+      <% if page > 1 %>
+        <a href="<%= root_path(page: page - 1) %>" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">&larr; Newer posts</a>
+      <% else %>
+        <span></span>
+      <% end %>
+      <% if has_more %>
+        <a href="<%= root_path(page: page + 1) %>" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Older posts &rarr;</a>
+      <% end %>
+    </nav>
+  <% end %>
+</div>

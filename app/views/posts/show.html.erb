@@ -1,0 +1,22 @@
+<% content_for(:title, "#{@post.title} — Andrey Esaulov") %>
+
+<article>
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 leading-tight"><%= @post.title %></h1>
+    <% if @post.published_at %>
+      <time datetime="<%= @post.published_at.iso8601 %>" class="text-sm text-gray-400 mt-3 block">
+        <%= @post.published_at.strftime("%B %-d, %Y") %>
+      </time>
+    <% else %>
+      <span class="text-sm text-amber-600 mt-3 block font-medium">Draft</span>
+    <% end %>
+  </header>
+
+  <div class="prose prose-gray max-w-none">
+    <%= simple_format(@post.body) %>
+  </div>
+
+  <div class="mt-12 pt-8 border-t border-gray-100">
+    <a href="<%= root_path %>" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">&larr; Back to all posts</a>
+  </div>
+</article>
