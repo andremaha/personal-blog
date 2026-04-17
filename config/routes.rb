@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
 
-  get "/:slug", to: "posts#show", as: :post
+  get "up" => "rails/health#show", as: :rails_health_check
 
   namespace :admin do
     resources :posts, param: :slug, except: :show
   end
 
-  get "up" => "rails/health#show", as: :rails_health_check
+  get "/:slug", to: "posts#show", as: :post
 end
