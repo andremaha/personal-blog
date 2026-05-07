@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= content_for(:title) || "Blog" %></title>
+    <title><%= content_for(:title) || site.title %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="<%= content_for(:description) || "A personal blog" %>">
+    <meta name="description" content="<%= content_for(:description) || site.meta_description %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -20,11 +20,13 @@
     <div class="max-w-2xl mx-auto px-6 py-12 sm:py-16">
       <header class="mb-16">
         <a href="<%= root_path %>" class="no-underline">
-          <h1 class="text-2xl font-bold tracking-tight text-gray-900">Andrey Esaulov</h1>
+          <h1 class="text-2xl font-bold tracking-tight text-gray-900"><%= site.title %></h1>
         </a>
-        <p class="mt-2 text-gray-500 text-base leading-relaxed">
-          Software engineer. Writing about code, technology, and ideas.
-        </p>
+        <% if site.tagline.present? %>
+          <p class="mt-2 text-gray-500 text-base leading-relaxed">
+            <%= site.tagline %>
+          </p>
+        <% end %>
         <nav class="mt-4 flex items-center gap-4 text-sm text-gray-500">
           <a href="<%= root_path %>" class="hover:text-gray-900 transition-colors">Posts</a>
           <a href="<%= feed_path(format: :rss) %>" class="hover:text-gray-900 transition-colors">RSS</a>
@@ -47,7 +49,7 @@
       </main>
 
       <footer class="mt-20 pt-8 border-t border-gray-100 text-sm text-gray-400">
-        &copy; <%= Date.current.year %> Andrey Esaulov
+        &copy; <%= Date.current.year %> <%= site.title %>
       </footer>
     </div>
   </body>

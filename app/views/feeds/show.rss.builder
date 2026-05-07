@@ -1,8 +1,8 @@
 xml.instruct! :xml, version: "1.0"
 xml.rss version: "2.0", "xmlns:atom" => "http://www.w3.org/2005/Atom" do
   xml.channel do
-    xml.title "Andrey Esaulov"
-    xml.description "A personal blog"
+    xml.title site.title
+    xml.description site.meta_description.to_s
     xml.link root_url
     xml.tag! "atom:link", href: feed_url(format: :rss), rel: "self", type: "application/rss+xml"
 

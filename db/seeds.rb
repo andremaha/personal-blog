@@ -1,3 +1,6 @@
+Site.current
+puts "Site info ready."
+
 user = User.find_or_initialize_by(email: "admin@example.com")
 user.update!(
   name: "Andrey Esaulov",

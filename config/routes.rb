@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :posts, param: :slug, except: :show
+    resource :site, only: %i[edit update]
   end
 
   get "/:slug", to: "posts#show", as: :post
