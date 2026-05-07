@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   scope :draft, -> { where(published_at: nil).order(updated_at: :desc) }
 
   def self.page(page_number)
-    page_number = [page_number.to_i, 1].max
+    page_number = [ page_number.to_i, 1 ].max
     offset_val = (page_number - 1) * PER_PAGE
     limit(PER_PAGE + 1).offset(offset_val)
   end
